@@ -183,10 +183,9 @@ public class TimePlugin extends Transform implements Plugin<Project> {
     }
 
     //need modify to what u want
-    // <com/caocaokeji/im/websocket/IMService$LocalBinder.class>
-    // <cn/caocaokeji/embedment/constant/ConstantFileAndTime.class>
-    // <caocaokeji/sdk/ui/common/color/UXUIColorUtils.class>
+    // <com/android/widget/TextView$LocalBinder.class>
+    // <com/android/widget/TextView.class>
     static boolean filterJarByName(String jarName) {
-        return jarName.contains("caocao")
+        return jarName.contains("android")
     }
 }
