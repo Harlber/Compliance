@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'java'
+apply plugin: 'java-gradle-plugin'
 
 
 dependencies {
@@ -15,6 +16,16 @@ buildscript {
     repositories {
         maven {
             url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
+// https://docs.gradle.org/current/userguide/custom_plugins.html
+gradlePlugin {
+    plugins {
+        myPlugins {
+            id = 'my-plugin'
+            implementationClass = 'com.hana.methodcost.CustomPlugin'
         }
     }
 }

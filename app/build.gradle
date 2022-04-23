@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
+    id 'my-plugin' // 源码依赖方式1
 }
-
+// 源码依赖方式2 apply <CustomPlugin>() 如果是kts构建则直接这样apply，不需要通过 java-gradle-plugin
+// https://www.youtube.com/watch?v=LPzBVtwGxlo&list=RDCMUCVHFbqXqoYvEWM1Ddxl0QDg&index=9
 android {
     compileSdk 31
 
@@ -45,6 +47,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    //implementation project(path: ':')  import BuildSrc
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
