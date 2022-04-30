@@ -2,6 +2,7 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'java-gradle-plugin'
 
+apply plugin: 'maven'
 
 dependencies {
     implementation gradleApi()
@@ -10,6 +11,9 @@ dependencies {
     implementation 'org.ow2.asm:asm:5.0.3'
     implementation 'org.ow2.asm:asm-commons:5.0.3'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // 通过BuildSrc中依赖本地项目，可进行debug
+    //implementation 'demo.sdk.plugin.lint:lint:4.0.1.0-SNAPSHOT'
 }
 
 buildscript {
@@ -30,11 +34,48 @@ gradlePlugin {
     }
 }
 
-repositories {
+allprojects {
     repositories {
         google()
         jcenter()
         mavenCentral()
+        maven{
+            url "../repo"
+        }
     }
 }
 
+
+// 这部分上传的task写在其他的插件项目中，用于上传该插件
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo')) //本地maven仓库的地址
+
+            pom.project {
+                version '4.0.1-SNAPSHOT'
+                artifactId 'lint'
+                groupId 'demo.sdk.plugin.lint'
+                packaging 'jar'
+                description PROJECT_DESCRIPTION
+            }
+        }
+    }
+
+    task groovydocJar(type: Jar, dependsOn: groovydoc) {
+        classifier = 'javadoc'
+        from groovydoc.destinationDir
+    }
+
+    // 生成sources.jar
+    task groovySourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.groovy
+    }
+
+    // 产生相关配置文件的任务
+    artifacts {
+        archives groovydocJar
+        archives groovySourcesJar
+    }
+}

@@ -8,6 +8,10 @@ buildscript {
         // https://blog.csdn.net/cheng545/article/details/105257107
         maven { url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'https://jitpack.io' }
+        // 本地maven依赖
+        /*maven{
+            url "./repo"
+        }*/
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.3"
