@@ -57,7 +57,7 @@ uploadArchives {
                 artifactId 'lint'
                 groupId 'demo.sdk.plugin.lint'
                 packaging 'jar'
-                description PROJECT_DESCRIPTION
+                description "PROJECT_DESCRIPTION"
             }
         }
     }

@@ -3,4 +3,5 @@ include ':app'
 include ':probelib'
 include ':library'
 include ':lint-check'
+include ':autodimens'
 rootProject.name = "Compliance"
